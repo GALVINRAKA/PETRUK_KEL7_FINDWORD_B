@@ -1,8 +1,113 @@
 //Kelompok 7 B
 //Galvin Citraka Pandya Nugraha (2317051014)
 //Nicho Dakkar Putra Alfira (2317051059)
+//Bayu Ardi Ramadhani (2357051008)
 
 
+//Dikerjakan oleh Bayu Ardi RAmadhani
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+bool cariHorizontal(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+
+    for (int o = 0; o < baris; ++o) {
+        for (int p = 0; p <= kolom - kata.length(); ++p) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (matriks[o][p + x] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool cariVertikal(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+    
+    for (int p = 0; p < kolom; ++p) {
+        for (int o = 0; o <= baris - kata.length(); ++o) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (matriks[o + x][p] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    
+    for (int p = 0; p < kolom; ++p) {
+        for (int o = baris - 1; o >= kata.length() - 1; --o) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (matriks[o - x][p] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool cariDiagonalKananBawah(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+
+    for (int o = 0; o <= baris - kata.length(); ++o) {
+        for (int p = 0; p <= kolom - kata.length(); ++p) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (matriks[o + x][p + x] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool cariDiagonalKananAtas(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+
+    for (int o = kata.length() - 1; o < baris; ++o) {
+        for (int p = kata.length() - 1; p < kolom; ++p) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (o - x < 0 || p - x < 0 || matriks[o - x][p - x] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 //Dikerjakan oleh Nicho Dakkar Putra Alfira
 bool cariDiagonalKiriBawah(const vector<vector<char>>& matriks, const string& kata) {
