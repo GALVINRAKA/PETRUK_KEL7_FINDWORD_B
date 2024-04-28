@@ -1,8 +1,59 @@
 //Kelompok 7 B
 //Galvin Citraka Pandya Nugraha (2317051014)
+//Nicho Dakkar Putra Alfira (2317051059)
 
 
 
+//Dikerjakan oleh Nicho Dakkar Putra Alfira
+bool cariDiagonalKiriBawah(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+
+    for (int o = 0; o <= baris - kata.length(); ++o) {
+        for (int p = kata.length() - 1; p < kolom; ++p) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (o + x >= baris || p - x < 0 || matriks[o + x][p - x] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool cariDiagonalKiriAtas(const vector<vector<char>>& matriks, const string& kata) {
+    int baris = matriks.size();
+    int kolom = matriks[0].size();
+
+    for (int o = kata.length() - 1; o < baris; ++o) {
+        for (int p = 0; p <= kolom - kata.length(); ++p) {
+            bool found = true;
+            for (int x = 0; x < kata.length(); ++x) {
+                if (o - x < 0 || matriks[o - x][p + x] != kata[x]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+bool cariKata(const vector<vector<char>>& matriks, const string& kata) {
+    if (cariHorizontal(matriks, kata) || cariVertikal(matriks, kata) || cariDiagonalKananBawah(matriks, kata) || cariDiagonalKiriBawah(matriks, kata) || cariDiagonalKananAtas(matriks, kata) || cariDiagonalKiriAtas(matriks, kata))
+        return true;
+    else
+        return false;
+}
 
 //Dikerjakan Oleh Galvin Citraka Pandya Nugraha
 int main() {
